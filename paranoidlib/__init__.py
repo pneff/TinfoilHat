@@ -172,3 +172,11 @@ class Http(httplib2.Http):
         return httplib2.Http._request(self, conn, host, absolute_uri,
                                       request_uri, method, body, headers,
                                       redirections, cachekey)
+
+    def _conn_request(self, conn, request_uri, method, body, headers):
+        try:
+            return httplib2.Http._conn_request(self, conn, request_uri, method,
+                                               body, headers)
+        except BlockedError:
+            conn.close()
+            raise

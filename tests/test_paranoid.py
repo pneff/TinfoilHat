@@ -66,3 +66,16 @@ def check_blocked_requests(url):
     # Test execution for individual tests in test_blocked_requests.
     h = paranoidlib.Http(timeout=1, blacklist=["1\.2\.3\.\d+"])
     response = h.request(url)
+
+
+@raises(paranoidlib.BlockedError)
+def test_blocked_twice():
+    # Request the same blocked URL twice. This will re-use a connection
+    # internally and that used to cause problems.
+    h = paranoidlib.Http()
+    try:
+        h.request('http://0.0.0.0/')
+    except paranoidlib.BlockedError:
+        pass
+    # And again, should raised BlockedError. Used to raise AttributeError.
+    h.request('http://0.0.0.0/')
