@@ -4,7 +4,7 @@ TinfoilHat
 TinfoilHat is a httplib2_ extension that is more paranoid about input. It won't
 allow downloading data from private IP ranges.
 
-This library was inspired by, but is not yes as paranoid as, Perl's `LWPx::ParanoidAgent`_.
+This library was inspired by, but is not yet as paranoid as, Perl's `LWPx::ParanoidAgent`_.
 
 Example usage
 -------------
