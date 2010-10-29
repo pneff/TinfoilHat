@@ -1,8 +1,5 @@
 """
-httplib2 extension that is more paranoid about input. Won't allow downloading
-data from private or internal IPs.
-
-Inspired by, but not yes as paranoid as, LWPx::ParanoidAgent.
+httplib2 extension that is more paranoid about input.
 """
 __version__ = "0.1"
 __author__ = [

@@ -1,0 +1,42 @@
+TinfoilHat
+==========
+
+TinfoilHat is a httplib2_ extension that is more paranoid about input. It won't
+allow downloading data from private IP ranges.
+
+This library was inspired by, but is not yes as paranoid as, Perl's `LWPx::ParanoidAgent`_.
+
+Example usage
+-------------
+
+TinfoilHat is a drop-in replacement for httplib2:
+
+>>> import tinfoilhat
+>>> client = tinfoilhat.Http()
+>>> client.request('http://0.1.2.3/')
+...
+tinfoilhat.BlockedError: Host name 0.1.2.3 is blocked
+
+
+You can also specify an additional blacklist as a list of regular expressions:
+
+>>> import tinfoilhat
+>>> client = tinfoilhat.Http(blacklist=['83\.\d+\.\d+\.\d+'])
+>>> client.request('http://83.5.6.7')
+...
+tinfoilhat.BlockedError: Host name 83.5.6.7 is blocked
+
+
+
+Author & License
+----------------
+
+This library was created by `Patrice Neff`_ for initial use at Memonic_. It's
+licensed under the `BSD License`_.
+
+
+.. _httplib2: https://code.google.com/p/httplib2/
+.. _LWPX::ParanoidAgent: http://search.cpan.org/dist/LWPx-ParanoidAgent/lib/LWPx/ParanoidAgent.pm
+.. _Patrice Neff: http://patrice.ch/
+.. _Memonic: http://www.memonic.com/
+.. _BSD License: http://www.linfo.org/bsdlicense.html
