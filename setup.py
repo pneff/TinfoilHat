@@ -1,11 +1,21 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
-import tinfoilhat
+try:
+    import tinfoilhat
+    version = tinfoilhat.__version__
+    doc = tinfoilhat.__doc__
+    author = tinfoilhat.__author__
+except ImportError:
+    # This will usually happen the first time setup.py is run in a new
+    # virtualenv
+    version = doc = author = ''
+
+
 setup(
     name = 'TinfoilHat',
-    version = tinfoilhat.__version__,
-    description = tinfoilhat.__doc__.split('.')[0],
-    author=", ".join(tinfoilhat.__author__),
+    version = version,
+    description = doc.split('.')[0],
+    author=", ".join(author),
     url='http://github.com/pneff/tinfoilhat/tree/master',
     download_url='http://pypi.python.org/pypi/TinfoilHat',
     packages = find_packages(),
