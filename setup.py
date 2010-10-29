@@ -15,7 +15,7 @@ setup(
     name = 'TinfoilHat',
     version = version,
     description = doc.split('.')[0],
-    long_description = open('README').read()
+    long_description = open('README').read(),
     author=", ".join(author),
     url='http://github.com/pneff/tinfoilhat/tree/master',
     download_url='http://pypi.python.org/pypi/TinfoilHat',
