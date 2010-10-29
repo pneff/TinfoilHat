@@ -1,10 +1,10 @@
-import paranoidlib
+import tinfoilhat
 import socket
 from nose.tools import raises
 
 
 def test_init():
-    h = paranoidlib.Http()
+    h = tinfoilhat.Http()
     assert h
 
 
@@ -26,7 +26,7 @@ def check_allowed_requests(url):
     # Error condition is any unknown raised exception, so there are no asserts.
     # Timeouts and socket errors are ignored as that means the request would
     # have been executed. That will be improved with some stubbing.
-    h = paranoidlib.Http(timeout=1)
+    h = tinfoilhat.Http(timeout=1)
     try:
         response = h.request(url)
     except AttributeError:
@@ -61,21 +61,21 @@ def test_blocked_requests():
     for url in TESTS:
         yield check_blocked_requests, url
 
-@raises(paranoidlib.BlockedError)
+@raises(tinfoilhat.BlockedError)
 def check_blocked_requests(url):
     # Test execution for individual tests in test_blocked_requests.
-    h = paranoidlib.Http(timeout=1, blacklist=["1\.2\.3\.\d+"])
+    h = tinfoilhat.Http(timeout=1, blacklist=["1\.2\.3\.\d+"])
     response = h.request(url)
 
 
-@raises(paranoidlib.BlockedError)
+@raises(tinfoilhat.BlockedError)
 def test_blocked_twice():
     # Request the same blocked URL twice. This will re-use a connection
     # internally and that used to cause problems.
-    h = paranoidlib.Http()
+    h = tinfoilhat.Http()
     try:
         h.request('http://0.0.0.0/')
-    except paranoidlib.BlockedError:
+    except tinfoilhat.BlockedError:
         pass
     # And again, should raised BlockedError. Used to raise AttributeError.
     h.request('http://0.0.0.0/')

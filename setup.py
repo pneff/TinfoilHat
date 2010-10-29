@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
-import paranoidlib
+import tinfoilhat
 setup(
-    name = 'paranoidlib',
-    version = paranoidlib.__version__,
-    description = paranoidlib.__doc__.split('.')[0],
-    author=", ".join(paranoidlib.__author__),
-    url='http://github.com/pneff/paranoidlib/tree/master',
-    download_url='http://pypi.python.org/pypi/paranoidlib',
+    name = 'TinfoilHat',
+    version = tinfoilhat.__version__,
+    description = tinfoilhat.__doc__.split('.')[0],
+    author=", ".join(tinfoilhat.__author__),
+    url='http://github.com/pneff/tinfoilhat/tree/master',
+    download_url='http://pypi.python.org/pypi/TinfoilHat',
     packages = find_packages(),
     include_package_data = True,
     install_requires = [
