@@ -64,7 +64,7 @@ def is_blocked(ip, blacklist):
 
     if blacklist:
         for b in blacklist:
-            if re.match(b, ip):
+            if b and re.match(b, ip):
                 return True
     return False
 

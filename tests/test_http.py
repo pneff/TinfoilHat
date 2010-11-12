@@ -79,3 +79,17 @@ def test_blocked_twice():
         pass
     # And again, should raised BlockedError. Used to raise AttributeError.
     h.request('http://0.0.0.0/')
+
+
+def test_empty_blacklist_pattern():
+    # Ignore empty blacklist patterns
+    h = tinfoilhat.Http(timeout=1, blacklist=[''])
+    try:
+        response = h.request('http://www.memonic.com/')
+    except AttributeError:
+        # That's what httplib2 <=0.6 will raise on timeout
+        pass
+    except socket.error:
+        # That's what httplib2 >0.6 will raise on timeout
+        pass
+
