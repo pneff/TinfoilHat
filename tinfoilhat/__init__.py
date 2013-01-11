@@ -1,9 +1,9 @@
 """
 httplib2 extension that is more paranoid about input.
 """
-__version__ = "0.2"
+__version__ = "0.3"
 __author__ = [
-    "Patrice Neff <software@patrice.ch>",
+    "Patrice Neff <mail@patrice.ch>",
 ]
 
 
