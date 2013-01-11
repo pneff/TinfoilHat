@@ -11,6 +11,11 @@ import httplib2
 import socket
 import re
 
+try:
+    import socks
+except ImportError:
+    socks = None
+
 # Regular expression that matches all the blocked IPs
 BLOCKRE = re.compile(r"""
     (
@@ -38,15 +43,18 @@ BLOCKRE = re.compile(r"""
 IS_IP = re.compile('\d{0,3}\.\d{0,3}\.\d{0,3}\.\d{0,3}').match
 
 # Default request timeout in seconds
-DEFAULT_TIMEOUT=10
+DEFAULT_TIMEOUT = 10
+
 
 class BlockedError(Exception):
     """Exception raised when a request was blocked."""
+
 
 class UnsupportedError(Exception):
     """Raised when the socket family is not supported (currently this library
     only works for IPv4 addresses).
     """
+
 
 def is_blocked(ip, blacklist):
     """Checks if the given IP is blocked."""
@@ -67,6 +75,7 @@ def is_blocked(ip, blacklist):
             if b and re.match(b, ip):
                 return True
     return False
+
 
 def is_blocked_sockaddr(family, sockaddr, blacklist):
     """Checks if a socket address is blocked."""
