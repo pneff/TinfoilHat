@@ -70,9 +70,9 @@ def is_blocked(ip, blacklist):
 
 def is_blocked_sockaddr(family, sockaddr, blacklist):
     """Checks if a socket address is blocked."""
-    if family != socket.AF_INET:
+    if family not in (socket.AF_INET, socket.AF_INET6):
         raise UnsupportedError("Unsupported address family %d" % family)
-    ip, port = sockaddr
+    ip = sockaddr[0]
     return is_blocked(ip, blacklist=blacklist)
 
 
